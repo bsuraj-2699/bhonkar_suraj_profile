@@ -1,0 +1,350 @@
+<title>Suraj Bhonkar — Alt</title>
+<style>
+  /* ============ TOKENS — v2 ============
+     Linear/Vercel-leaning: quiet near-black, one indigo accent,
+     no boxed panels — a single reading column, thin rules, and
+     restraint instead of dashboard chrome. */
+  :root{
+    --bg:            #0B0B0E;
+    --panel:         #131317;
+    --hair:          #212126;
+    --hair-strong:   #2B2B32;
+    --text:          #EDEDEF;
+    --text-dim:      #8E8E97;
+    --text-faint:    #565560;
+    --accent:        #7B79FF;
+    --accent-dim:    #5A57C9;
+    --green:         #3DD68C;
+    --display: 'Sora', -apple-system, 'Segoe UI', sans-serif;
+    --sans: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ background:var(--bg); }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ margin:0; font-family:var(--display); text-wrap:balance; }
+  p{ margin:0; }
+  a{ color:inherit; }
+  ::selection{ background:var(--accent); color:#0B0B0E; }
+
+  .col{ max-width:720px; margin:0 auto; padding:0 28px; }
+  .wide{ max-width:920px; margin:0 auto; padding:0 28px; }
+  @media (max-width:600px){ .col,.wide{ padding:0 20px; } }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--text-faint);
+  }
+  .eyebrow b{ color:var(--accent); font-weight:400; }
+
+  /* ============ NAV ============ */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(11,11,14,.82); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; height:56px; }
+  .brand{ font-family:var(--display); font-weight:700; font-size:15px; text-decoration:none; color:var(--text); }
+  .nav-links{ display:flex; gap:26px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    font-size:13.5px; color:var(--text-dim); text-decoration:none;
+    transition:color .15s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color:var(--text); }
+  @media (max-width:640px){ .nav-links{ display:none; } }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  /* ============ HERO ============ */
+  .hero{ padding:104px 0 64px; }
+  .hero .eyebrow{ display:flex; align-items:center; gap:8px; margin-bottom:22px; }
+  .hero .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--green); }
+  @media (prefers-reduced-motion:no-preference){
+    .hero .eyebrow .dot{ animation:pulse 2.4s ease-in-out infinite; }
+  }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:.3; } }
+
+  .hero h1{
+    font-size:clamp(32px,5.2vw,50px); font-weight:700; line-height:1.14; letter-spacing:-.015em;
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent); }
+  .hero .pitch{
+    margin-top:20px; font-size:17px; color:var(--text-dim); max-width:58ch; line-height:1.75;
+  }
+  .hero .links{ margin-top:28px; display:flex; flex-wrap:wrap; gap:22px; }
+  .hero .links a{
+    font-size:14px; color:var(--text); text-decoration:none; border-bottom:1px solid var(--hair-strong);
+    padding-bottom:2px; transition:border-color .15s ease, color .15s ease;
+  }
+  .hero .links a:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .metrics-row{
+    margin-top:56px; display:flex; gap:0; flex-wrap:wrap;
+    border-top:1px solid var(--hair); padding-top:26px;
+  }
+  .metric{ flex:1 1 140px; padding-right:24px; }
+  .metric .n{
+    font-family:var(--mono); font-size:26px; color:var(--text); font-variant-numeric:tabular-nums;
+  }
+  .metric .n span{ color:var(--accent); }
+  .metric .d{ margin-top:6px; font-size:12.5px; color:var(--text-faint); line-height:1.5; max-width:22ch; }
+
+  /* ============ SECTION SHELL ============ */
+  section{ padding:64px 0; border-top:1px solid var(--hair); }
+  .sec-title{ display:flex; align-items:baseline; gap:14px; margin-bottom:34px; }
+  .sec-title h2{ font-size:22px; font-weight:700; color:var(--text); }
+
+  .reveal{ opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+  /* ============ ABOUT ============ */
+  .about p{ font-size:15.5px; color:var(--text-dim); max-width:64ch; }
+  .about p + p{ margin-top:14px; }
+  .role-row{ margin-top:22px; display:flex; flex-wrap:wrap; gap:10px; }
+  .role-chip{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    border:1px solid var(--hair-strong); border-radius:100px; padding:6px 14px;
+  }
+
+  /* ============ EXPERIENCE — quiet list ============ */
+  .exp-row{ padding:24px 0; border-top:1px solid var(--hair); }
+  .exp-row:first-child{ border-top:none; padding-top:0; }
+  .exp-head{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; }
+  .exp-head .role{ font-size:16px; font-weight:700; color:var(--text); }
+  .exp-head .when{ font-family:var(--mono); font-size:12px; color:var(--text-faint); white-space:nowrap; }
+  .exp-org{ font-size:13px; color:var(--accent); margin-top:4px; }
+  .exp-list{ margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+  .exp-list div{ font-size:14.5px; color:var(--text-dim); line-height:1.6; }
+
+  /* ============ PROJECTS — hover-reveal list, no cards ============ */
+  .proj-row{
+    display:block; padding:26px 0; border-top:1px solid var(--hair);
+    text-decoration:none; color:inherit;
+  }
+  .proj-row:first-child{ border-top:none; padding-top:0; }
+  .proj-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .proj-top h3{ font-size:18px; font-weight:700; color:var(--text); transition:color .15s ease; }
+  .proj-row:hover .proj-top h3{ color:var(--accent); }
+  .proj-arrow{ font-family:var(--mono); color:var(--text-faint); font-size:14px; transition:transform .15s ease, color .15s ease; }
+  .proj-row:hover .proj-arrow{ color:var(--accent); transform:translate(2px,-2px); }
+  .proj-desc{ margin-top:10px; font-size:14.5px; color:var(--text-dim); max-width:60ch; line-height:1.65; }
+  .proj-meta{ margin-top:14px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+  .proj-meta .stack{ font-family:var(--mono); font-size:11.5px; color:var(--text-faint); }
+  .proj-meta .m{ font-family:var(--mono); font-size:11.5px; color:var(--text-dim); }
+  .proj-meta .m b{ color:var(--accent); font-weight:400; }
+
+  /* ============ STACK — plain columns ============ */
+  .stack-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px 24px; }
+  @media (max-width:640px){ .stack-grid{ grid-template-columns:repeat(2,1fr); } }
+  .stack-col .eyebrow{ margin-bottom:10px; display:block; }
+  .stack-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  .stack-col li{ font-size:13.5px; color:var(--text-dim); }
+
+  /* ============ EDUCATION ============ */
+  .edu-row{ display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--hair); }
+  .edu-row:first-child{ border-top:none; }
+  .edu-row .t{ font-size:14.5px; color:var(--text); }
+  .edu-row .s{ font-size:12.5px; color:var(--text-faint); margin-top:2px; }
+  .edu-row .y{ font-family:var(--mono); font-size:12px; color:var(--text-faint); white-space:nowrap; }
+  .cert-note{ margin-top:16px; font-size:13px; color:var(--text-faint); }
+
+  /* ============ FOOTER ============ */
+  footer{ padding:64px 0 48px; border-top:1px solid var(--hair); }
+  footer h2{ font-size:24px; max-width:14ch; }
+  footer .sub{ margin-top:12px; color:var(--text-dim); font-size:14.5px; max-width:46ch; }
+  .foot-links{ margin-top:26px; display:flex; flex-wrap:wrap; gap:22px; }
+  .foot-links a{
+    font-size:14px; color:var(--text); text-decoration:none; border-bottom:1px solid var(--hair-strong);
+    padding-bottom:2px; transition:border-color .15s ease, color .15s ease;
+  }
+  .foot-links a:hover{ border-color:var(--accent); color:var(--accent); }
+  .copyright{
+    margin-top:48px; padding-top:20px; border-top:1px solid var(--hair);
+    font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+</style>
+
+<div class="wrap">
+  <header class="nav">
+    <div class="wide nav-row">
+      <a href="#top" class="brand">Suraj Bhonkar</a>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="col hero">
+      <div class="eyebrow"><span class="dot"></span>Open to AI Engineer &amp; GenAI roles · Navi Mumbai, India</div>
+      <h1>AI engineer building <em>multi-agent</em> systems that ship.</h1>
+      <p class="pitch">I design and deploy AI systems — multi-agent orchestration, RAG pipelines, and LLM automation — end to end, from FastAPI backends to live products, using Python, LangGraph, and a stack of frontier LLM APIs.</p>
+      <div class="links">
+        <a href="mailto:bhonkarsuraj99@gmail.com">Email</a>
+        <a href="https://github.com/bsuraj-2699" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/suraj-bhonkar-8a4369188/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+
+      <div class="metrics-row reveal">
+        <div class="metric"><div class="n"><span>3</span></div><div class="d">AI systems designed &amp; shipped independently</div></div>
+        <div class="metric"><div class="n"><span>&lt;30s</span></div><div class="d">End-to-end analysis turnaround, ALPHA</div></div>
+        <div class="metric"><div class="n"><span>~90%</span></div><div class="d">Cut in manual candidate screening</div></div>
+        <div class="metric"><div class="n"><span>5</span></div><div class="d">LLM providers integrated in production</div></div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="col">
+        <div class="sec-title reveal"><span class="eyebrow">Profile</span></div>
+        <div class="about reveal">
+          <p>AI Engineer with hands-on experience building multi-agent systems, LLM pipelines, RAG applications, and AI automation tools using AI-native development platforms with techstack Python, FastAPI, LangGraph, LangChain, and leading LLM APIs.</p>
+          <p>Engineered end-to-end AI products spanning financial analysis, hiring automation, and semantic search — architecting the agent logic, the retrieval layer, and the deployment path in the same build. Certified by IIT Hyderabad in AI &amp; Emerging Technologies.</p>
+          <div class="role-row">
+            <span class="role-chip">AI Engineer</span>
+            <span class="role-chip">AI Red Teaming</span>
+            <span class="role-chip">GenAI Analyst</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="col">
+        <div class="sec-title reveal"><span class="eyebrow">Experience</span></div>
+
+        <div class="exp-row reveal">
+          <div class="exp-head"><div class="role">AI Engineer, Independent Projects</div><div class="when">Dec 2024 — Present</div></div>
+          <div class="exp-org">Self-directed · Panvel</div>
+          <div class="exp-list">
+            <div>Designed, engineered, and deployed 3 AI applications using Python, FastAPI, LangGraph, LangChain, Qdrant, and multi-provider LLM APIs (OpenAI, Anthropic, Gemini, Groq, Mistral).</div>
+            <div>Engineered ALPHA, a LangGraph-based multi-agent financial analysis platform with 5 parallel AI agents, deterministic decision pipelines, and RAG, delivering stock analysis in under 30 seconds.</div>
+            <div>Delivered Quest Evaluator and JobTrack Agent — AI systems for automated candidate evaluation and semantic job search — cutting manual screening by ~90% with ~8-second evaluations and Qdrant-based semantic search.</div>
+          </div>
+        </div>
+
+        <div class="exp-row reveal">
+          <div class="exp-head"><div class="role">Freelance AI Model Trainer</div><div class="when">Aug 2024 — Nov 2024</div></div>
+          <div class="exp-org">Outlier.ai · Remote</div>
+          <div class="exp-list">
+            <div>Evaluated LLM outputs for reasoning quality, instruction adherence, and response accuracy across multiple model iterations, contributing to measurable reliability gains.</div>
+            <div>Evaluated and annotated complex mathematical data across dynamic projects, enforcing strict accuracy and logical consistency.</div>
+            <div>Identified and documented hallucination patterns, ambiguity failures, and assumption-driven errors, feeding structured reports back to engineering teams.</div>
+            <div>Supported prompt-optimisation work that improved model performance, output consistency, and edge-case handling.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="col">
+        <div class="sec-title reveal"><span class="eyebrow">Selected Work</span></div>
+
+        <a class="proj-row reveal" href="https://github.com/bsuraj-2699/ALPHA" target="_blank" rel="noopener">
+          <div class="proj-top"><h3>ALPHA</h3><span class="proj-arrow">↗</span></div>
+          <p class="proj-desc">IIT Hyderabad capstone — a LangGraph multi-agent financial analysis platform for Indian equities. 5 parallel analyst agents run a Bull/Bear debate through a deterministic decision pipeline, backed by a Qdrant hybrid-retrieval RAG layer.</p>
+          <div class="proj-meta">
+            <span class="m"><b>&lt;30s</b> full analysis</span><span class="m"><b>5</b> parallel agents</span>
+            <span class="stack">Python · FastAPI · LangGraph · GPT-4o · Qdrant · PostgreSQL · Redis · Docker · Next.js</span>
+          </div>
+        </a>
+
+        <a class="proj-row reveal" href="https://github.com/bsuraj-2699/quest-evaluator" target="_blank" rel="noopener">
+          <div class="proj-top"><h3>Quest Evaluator</h3><span class="proj-arrow">↗</span></div>
+          <p class="proj-desc">An end-to-end AI hiring pipeline wiring Google Forms, Sheets, and 5 LLM providers together — automatically scoring candidate submissions every 60 seconds, with README extraction, ZIP parsing, and a live employer dashboard.</p>
+          <div class="proj-meta">
+            <span class="m"><b>~90%</b> less manual review</span><span class="m"><b>&lt;8s</b> per evaluation</span>
+            <span class="stack">Node.js · Sheets API · Drive API · OpenAI · Anthropic · Gemini · Mistral · Groq</span>
+          </div>
+        </a>
+
+        <a class="proj-row reveal" href="https://github.com/bsuraj-2699/Job-Tracker" target="_blank" rel="noopener">
+          <div class="proj-top"><h3>Job Track Agent</h3><span class="proj-arrow">↗</span></div>
+          <p class="proj-desc">An AI-powered job application tracker built around a Chrome extension. One click captures and structurally extracts a posting from any major job board, indexed with Qdrant embeddings for semantic search and traced through LangSmith.</p>
+          <div class="proj-meta">
+            <span class="m"><b>2–3s</b> capture &amp; extract</span><span class="m"><b>384-d</b> embeddings</span>
+            <span class="stack">Python · FastAPI · LangChain · LangSmith · Groq · Qdrant · Docker · Chrome Ext (MV3)</span>
+          </div>
+        </a>
+
+        <div class="proj-row reveal">
+          <div class="proj-top"><h3>LLM Failure Analysis</h3><span class="proj-arrow" style="opacity:.4">—</span></div>
+          <p class="proj-desc">A red-teaming evaluation suite of 10 prompt scenarios probing LLM failure modes — hallucination, lexical ambiguity, implicit assumptions, non-deterministic evaluation — with root-cause analysis and a cross-prompt evaluation framework.</p>
+          <div class="proj-meta">
+            <span class="m"><b>10</b> failure scenarios</span><span class="m"><b>5</b> failure classes</span>
+            <span class="stack">Prompt Red-Teaming · ChatGPT · Wispr Flow</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="wide">
+        <div class="sec-title reveal"><span class="eyebrow">Stack</span></div>
+        <div class="stack-grid reveal">
+          <div class="stack-col"><span class="eyebrow">AI &amp; LLMs</span><ul><li>Prompt Engineering</li><li>RAG</li><li>Multi-Agent Orchestration</li><li>Semantic Search</li></ul></div>
+          <div class="stack-col"><span class="eyebrow">LLM Platforms</span><ul><li>OpenAI</li><li>Anthropic</li><li>Gemini</li><li>Groq</li><li>Mistral</li></ul></div>
+          <div class="stack-col"><span class="eyebrow">Frameworks</span><ul><li>LangGraph</li><li>LangChain</li><li>FastAPI</li><li>LangSmith</li></ul></div>
+          <div class="stack-col"><span class="eyebrow">Languages</span><ul><li>Python</li><li>JavaScript</li></ul></div>
+          <div class="stack-col"><span class="eyebrow">Databases</span><ul><li>PostgreSQL</li><li>Qdrant</li><li>Redis</li></ul></div>
+          <div class="stack-col"><span class="eyebrow">Deployment &amp; Tools</span><ul><li>Docker</li><li>GitHub</li><li>Vercel</li><li>Render</li><li>CI/CD</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="col">
+        <div class="sec-title reveal"><span class="eyebrow">Education &amp; Certifications</span></div>
+        <div class="reveal">
+          <div class="edu-row"><div><div class="t">Professional Certification — AI &amp; Emerging Technologies</div><div class="s">IIT Hyderabad</div></div><div class="y">2026</div></div>
+          <div class="edu-row"><div><div class="t">PG Diploma — Global Financial Markets</div><div class="s">BSE Institute Ltd., Mumbai</div></div><div class="y">2023</div></div>
+          <div class="edu-row"><div><div class="t">B.Sc. Physics</div><div class="s">Annasaheb Vartak College, Mumbai University</div></div><div class="y">2020</div></div>
+          <div class="cert-note">Additional, Vanderbilt University via Coursera (2025): Prompt Engineering for Developers · ChatGPT Advanced Data Analysis · Trustworthy Generative AI</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="col reveal">
+      <h2>Let's build something worth shipping.</h2>
+      <p class="sub">Open to AI Engineer, AI Red Teaming, and GenAI Analyst roles. Reach out directly — I read every message.</p>
+      <div class="foot-links">
+        <a href="mailto:bhonkarsuraj99@gmail.com">bhonkarsuraj99@gmail.com</a>
+        <a href="https://github.com/bsuraj-2699" target="_blank" rel="noopener">github.com/bsuraj-2699</a>
+        <a href="https://www.linkedin.com/in/suraj-bhonkar-8a4369188/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Suraj Bhonkar — Navi Mumbai, India</span>
+        <span>Built with Python, LangGraph &amp; a lot of debugging</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduced || !('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
